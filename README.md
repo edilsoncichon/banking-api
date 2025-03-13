@@ -5,6 +5,6 @@
 Este repositório contém a solução para o desafio técnico proposto pela Objective.
 
 ### Requisitos
-Os requisitos do projeto estão descritos no arquivo [.doc/requirements.md](.doc/requirements.md).
+Os requisitos do projeto estão descritos [neste arquivo](.doc/Desafio_Tecnico_OBJ.pdf).
 
 

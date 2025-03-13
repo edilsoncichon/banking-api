@@ -1,9 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "objective/banking-api",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["objective"],
+    "description": "Banking API.",
+    "keywords": [
+        "objective",
+        "challenge",
+        "api",
+        "banking"
+    ],
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
