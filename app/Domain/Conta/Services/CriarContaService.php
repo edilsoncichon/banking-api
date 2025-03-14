@@ -3,12 +3,17 @@
 namespace App\Domain\Conta\Services;
 
 use App\Domain\Conta\Conta;
+use App\Domain\Conta\Repository\ContaRepository;
 use App\Domain\Support\Exceptions\DomainException;
 use App\Domain\Support\Exceptions\ValidationException;
 use Illuminate\Support\Facades\Validator;
 
 final class CriarContaService
 {
+    public function __construct(private ContaRepository $contaRepository)
+    {
+    }
+
     /**
      * @throws ValidationException
      * @throws DomainException
@@ -23,19 +28,12 @@ final class CriarContaService
             throw new ValidationException($validator->errors()->all());
         }
 
-        $exists = Conta::query()
-            ->where('numero_conta', $data['numero_conta'])
-            ->exists();
+        $conta = $this->contaRepository->findByNumeroConta($data['numero_conta']);
 
-        if ($exists) {
+        if ($conta) {
             throw new DomainException('Conta já existe.');
         }
 
-        $conta = new Conta();
-        $conta->numero_conta = $data['numero_conta'];
-        $conta->saldo = $data['saldo'];
-        $conta->save();
-
-        return $conta;
+        return $this->contaRepository->create((int)$data['numero_conta'], (float)$data['saldo']);
     }
 }

@@ -15,10 +15,10 @@ class CriarContaController extends Controller
     {
         try {
             $conta = $service->execute($request->all());
-        } catch (DomainException $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->getErrors()], 422);
+        } catch (DomainException $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
 
         return ContaResource::make($conta);
