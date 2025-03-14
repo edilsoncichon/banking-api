@@ -22,7 +22,7 @@ class CriarTransacaoController extends Controller
         } catch (NotFoundException $e) {
             return response()->json(['message' => $e->getMessage()], Response::HTTP_NOT_FOUND);
         } catch (DomainException $e) {
-            return response()->json(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+            return response()->json(['message' => $e->getMessage()], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return ContaResource::make($transacao->conta)

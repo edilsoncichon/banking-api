@@ -24,4 +24,14 @@ class Transacao extends Model
     {
         return $this->belongsTo(Conta::class);
     }
+
+    public function calcularValorEfetivo(): float
+    {
+        return $this->valor + $this->calcularValorTaxa();
+    }
+
+    public function calcularValorTaxa(): float
+    {
+        return $this->valor * $this->forma_pagamento->getTaxa();
+    }
 }

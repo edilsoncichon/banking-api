@@ -11,7 +11,7 @@ final class ContaRepository
         return Conta::query()->firstWhere('numero_conta', $numeroConta);
     }
 
-    public function create(int $numeroConta, int $saldo): Conta
+    public function create(int $numeroConta, float $saldo): Conta
     {
         $conta = new Conta();
         $conta->numero_conta = $numeroConta;
