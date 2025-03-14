@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int id
- * @property string numero_conta
+ * @property int numero_conta
  * @property float saldo
  * @property Collection<Transacao> transacoes
  */
@@ -20,6 +20,10 @@ class Conta extends Model
     use HasFactory;
 
     protected $table = 'conta';
+
+    protected $casts = [
+        'numero_conta' => 'integer',
+    ];
 
     public function transacoes(): HasMany
     {
