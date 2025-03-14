@@ -23,6 +23,7 @@ class Conta extends Model
 
     protected $casts = [
         'numero_conta' => 'integer',
+        'saldo' => 'float',
     ];
 
     public function transacoes(): HasMany

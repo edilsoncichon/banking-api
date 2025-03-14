@@ -2,6 +2,7 @@
 
 namespace Tests\E2E;
 
+use App\Domain\Conta\Conta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -9,7 +10,31 @@ class ContaApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_se_cria_conta_via_api(): void
+    public function test_se_valida_conta_inexistente(): void
+    {
+        $response = $this->getJson('/api/conta?numero_conta=123');
+        $response->assertStatus(404);
+        $response->assertJson([]);
+    }
+
+    public function test_se_consulta_conta(): void
+    {
+        /** @var Conta $conta */
+        $conta = Conta::factory()->create(['numero_conta' => 123456789, 'saldo' => 1000.99]);
+
+        $response = $this->getJson('/api/conta?numero_conta=123456789');
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'numero_conta' => $conta->numero_conta,
+            'saldo' => $conta->saldo,
+        ]);
+
+        $this->assertIsInt($response->json('numero_conta'));
+        $this->assertIsFloat($response->json('saldo'));
+    }
+
+    public function test_se_cria_conta(): void
     {
         $data = [
             'numero_conta' => 123,
@@ -59,7 +84,7 @@ class ContaApiTest extends TestCase
         ]);
     }
 
-    public function test_se_valida_conta_existente(): void
+    public function test_se_valida_duplicidade(): void
     {
         $data = [
             'numero_conta' => 123,
