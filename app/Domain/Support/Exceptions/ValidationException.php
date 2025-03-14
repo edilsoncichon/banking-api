@@ -2,7 +2,7 @@
 
 namespace App\Domain\Support\Exceptions;
 
-class ValidationException extends \Exception
+final class ValidationException extends DomainException
 {
     private array $errors;
 

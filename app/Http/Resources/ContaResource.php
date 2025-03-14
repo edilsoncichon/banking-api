@@ -15,7 +15,7 @@ class ContaResource extends JsonResource
     {
         return [
             'numero_conta' => $this->numero_conta,
-            'saldo' => $this->saldo,
+            'saldo' => round($this->saldo, 2),
         ];
     }
 }
