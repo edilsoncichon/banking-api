@@ -1,13 +1,18 @@
 <?php declare(strict_types=1);
 
+namespace Tests\Feature;
+
 use App\Domain\Conta\Conta;
 use App\Domain\Transacao\FormaPagamento;
 use App\Domain\Transacao\Transacao;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class DatabaseTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_se_consegue_criar_conta(): void
     {
         $conta = new Conta();
