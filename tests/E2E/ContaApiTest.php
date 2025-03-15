@@ -12,14 +12,14 @@ class ContaApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_se_valida_conta_inexistente(): void
+    public function test_deveria_validar_conta_inexistente(): void
     {
         $response = $this->getJson('/api/conta?numero_conta=123');
         $response->assertStatus(404);
         $response->assertJson([]);
     }
 
-    public function test_se_consulta_conta(): void
+    public function test_deveria_consultar_conta_existente(): void
     {
         /** @var Conta $conta */
         $conta = Conta::factory()->create(['numero_conta' => 123456789, 'saldo' => 1000.99]);
@@ -36,7 +36,7 @@ class ContaApiTest extends TestCase
         $this->assertIsFloat($response->json('saldo'));
     }
 
-    public function test_se_cria_conta(): void
+    public function test_deveria_criar_conta(): void
     {
         $data = [
             'numero_conta' => 123,
@@ -52,7 +52,7 @@ class ContaApiTest extends TestCase
         ]);
     }
 
-    public function test_se_valida_numero_conta(): void
+    public function test_deveria_validar_numero_conta(): void
     {
         $data = [
             'numero_conta' => 'abc',
@@ -69,7 +69,7 @@ class ContaApiTest extends TestCase
         ]);
     }
 
-    public function test_se_valida_saldo_menor_que_zero(): void
+    public function test_deveria_validar_saldo_menor_que_zero(): void
     {
         $data = [
             'numero_conta' => 123,
@@ -86,7 +86,7 @@ class ContaApiTest extends TestCase
         ]);
     }
 
-    public function test_se_valida_duplicidade(): void
+    public function test_deveria_validar_duplicidade(): void
     {
         $data = [
             'numero_conta' => 123,
@@ -103,7 +103,7 @@ class ContaApiTest extends TestCase
         ]);
     }
 
-    public function test_se_dados_conta_sao_obrigatorios(): void
+    public function test_deveria_validar_dados_obrigatorios(): void
     {
         $response = $this->postJson('/api/conta', []);
 

@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ApiTest extends TestCase
 {
-    public function test_the_api_returns_a_successful_response(): void
+    public function test_deveria_garantir_que_api_funciona(): void
     {
         $response = $this->get('/api');
         $response->assertStatus(200);
