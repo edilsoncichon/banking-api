@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\Conta\Repository;
 
@@ -13,7 +15,7 @@ final class ContaRepository
 
     public function create(int $numeroConta, float $saldo): Conta
     {
-        $conta = new Conta();
+        $conta = new Conta;
         $conta->numero_conta = $numeroConta;
         $conta->saldo = $saldo;
         $conta->save();

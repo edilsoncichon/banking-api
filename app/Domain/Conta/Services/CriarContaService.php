@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\Conta\Services;
 
@@ -10,9 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 final class CriarContaService
 {
-    public function __construct(private ContaRepository $contaRepository)
-    {
-    }
+    public function __construct(private ContaRepository $contaRepository) {}
 
     /**
      * @throws ValidationException
@@ -34,6 +34,6 @@ final class CriarContaService
             throw new DomainException('Conta já existe.');
         }
 
-        return $this->contaRepository->create((int)$data['numero_conta'], (float)$data['saldo']);
+        return $this->contaRepository->create((int) $data['numero_conta'], (float) $data['saldo']);
     }
 }

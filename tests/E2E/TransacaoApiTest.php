@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\E2E;
 
@@ -27,7 +29,7 @@ class TransacaoApiTest extends TestCase
         $response = $this->postJson('/api/transacao', [
             'forma_pagamento' => $formaPagamento,
             'numero_conta' => $conta->numero_conta,
-            'valor' => $valorTransacao
+            'valor' => $valorTransacao,
         ])->assertStatus(201);
 
         $valorTaxa = $valorTransacao * $formaPagamento->getTaxa();
@@ -56,7 +58,7 @@ class TransacaoApiTest extends TestCase
         $response = $this->postJson('/api/transacao', [
             'forma_pagamento' => $formaPagamento,
             'numero_conta' => $conta->numero_conta,
-            'valor' => $valorTransacao
+            'valor' => $valorTransacao,
         ])->assertStatus(201);
 
         $valorTaxa = $valorTransacao * $formaPagamento->getTaxa();
@@ -85,7 +87,7 @@ class TransacaoApiTest extends TestCase
         $response = $this->postJson('/api/transacao', [
             'forma_pagamento' => $formaPagamento,
             'numero_conta' => $conta->numero_conta,
-            'valor' => $valorTransacao
+            'valor' => $valorTransacao,
         ])->assertStatus(201);
 
         $valorTaxa = $valorTransacao * $formaPagamento->getTaxa();
@@ -103,13 +105,13 @@ class TransacaoApiTest extends TestCase
         $response = $this->postJson('/api/transacao', [
             'forma_pagamento' => 'CRÉDITO',
             'numero_conta' => '',
-            'valor' => -100
+            'valor' => -100,
         ])->assertStatus(422);
 
-        $response->assertJson(["errors" => [
-            "The numero conta field is required.",
-            "The selected forma pagamento is invalid.",
-            "The valor field must be at least 0."
+        $response->assertJson(['errors' => [
+            'The numero conta field is required.',
+            'The selected forma pagamento is invalid.',
+            'The valor field must be at least 0.',
         ]]);
 
     }
@@ -119,11 +121,11 @@ class TransacaoApiTest extends TestCase
         $response = $this->postJson('/api/transacao', [
             'forma_pagamento' => FormaPagamento::DEBITO,
             'numero_conta' => '999999',
-            'valor' => 210.99
+            'valor' => 210.99,
         ])->assertStatus(404);
 
         $response->assertJson([
-            'message' => 'Conta não encontrada.'
+            'message' => 'Conta não encontrada.',
         ]);
     }
 
@@ -143,11 +145,11 @@ class TransacaoApiTest extends TestCase
         $response = $this->postJson('/api/transacao', [
             'forma_pagamento' => FormaPagamento::DEBITO,
             'numero_conta' => $conta->numero_conta,
-            'valor' => 210.99
+            'valor' => 210.99,
         ])->assertStatus(422);
 
         $response->assertJson([
-            'message' => 'Saldo insuficiente.'
+            'message' => 'Saldo insuficiente.',
         ]);
     }
 }

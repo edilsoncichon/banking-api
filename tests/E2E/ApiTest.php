@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\E2E;
 
@@ -10,6 +12,6 @@ class ApiTest extends TestCase
     {
         $response = $this->get('/api');
         $response->assertStatus(200);
-        $response->assertJson(['message' => 'Banking API',]);
+        $response->assertJson(['message' => 'Banking API']);
     }
 }

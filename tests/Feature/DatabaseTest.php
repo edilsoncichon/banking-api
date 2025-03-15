@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
@@ -15,7 +17,7 @@ class DatabaseTest extends TestCase
 
     public function test_deveria_salvar_conta_com_saldo_maximo(): void
     {
-        $conta = new Conta();
+        $conta = new Conta;
         $conta->numero_conta = '123456';
         $conta->saldo = 9999999999.99;
         $conta->save();
@@ -31,7 +33,7 @@ class DatabaseTest extends TestCase
         /** @var Conta $conta */
         $conta = Conta::factory()->create();
 
-        $transacao = new Transacao();
+        $transacao = new Transacao;
         $transacao->valor = 9999999999.99;
         $transacao->forma_pagamento = FormaPagamento::PIX;
         $transacao->conta()->associate($conta);

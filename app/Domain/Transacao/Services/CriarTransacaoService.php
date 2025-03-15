@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Domain\Transacao\Services;
 
@@ -14,9 +16,7 @@ use Illuminate\Validation\Rule;
 
 final class CriarTransacaoService
 {
-    public function __construct(private ContaRepository $contaRepository)
-    {
-    }
+    public function __construct(private ContaRepository $contaRepository) {}
 
     /**
      * @throws ValidationException
@@ -35,13 +35,13 @@ final class CriarTransacaoService
             throw new ValidationException($validator->errors()->all());
         }
 
-        $conta = $this->contaRepository->findByNumeroConta((int)$data['numero_conta']);
+        $conta = $this->contaRepository->findByNumeroConta((int) $data['numero_conta']);
 
         if (is_null($conta)) {
             throw new NotFoundException('Conta não encontrada.');
         }
 
-        $transacao = new Transacao();
+        $transacao = new Transacao;
         $transacao->forma_pagamento = FormaPagamento::from($data['forma_pagamento']);
         $transacao->conta()->associate($conta);
         $transacao->valor = $data['valor'];
