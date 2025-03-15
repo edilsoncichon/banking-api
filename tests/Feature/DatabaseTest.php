@@ -13,27 +13,26 @@ class DatabaseTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_se_consegue_criar_conta(): void
+    public function test_deveria_salvar_conta_com_saldo_maximo(): void
     {
         $conta = new Conta();
         $conta->numero_conta = '123456';
-        $conta->saldo = 1000.00;
+        $conta->saldo = 9999999999.99;
         $conta->save();
 
         $contaDb = Conta::query()->firstWhere('numero_conta', '123456');
 
         $this->assertEquals($conta->numero_conta, $contaDb->numero_conta);
         $this->assertEquals($conta->saldo, $contaDb->saldo);
-
     }
 
-    public function test_se_consegue_criar_transacao(): void
+    public function test_deveria_salvar_transacao_com_valor_maximo(): void
     {
         /** @var Conta $conta */
         $conta = Conta::factory()->create();
 
         $transacao = new Transacao();
-        $transacao->valor = 100.00;
+        $transacao->valor = 9999999999.99;
         $transacao->forma_pagamento = FormaPagamento::PIX;
         $transacao->conta()->associate($conta);
         $transacao->save();

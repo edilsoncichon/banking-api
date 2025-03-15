@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('conta_id')->constrained('conta');
             $table->char('forma_pagamento')->nullable();
-            $table->decimal('valor')->nullable();
+            $table->decimal('valor', 12)->nullable();
             $table->timestamps();
         });
     }

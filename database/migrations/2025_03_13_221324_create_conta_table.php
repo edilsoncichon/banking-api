@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('conta', function (Blueprint $table) {
             $table->id();
             $table->string('numero_conta')->nullable();
-            $table->decimal('saldo')->nullable();
+            $table->decimal('saldo', 12)->nullable();
             $table->timestamps();
         });
     }
