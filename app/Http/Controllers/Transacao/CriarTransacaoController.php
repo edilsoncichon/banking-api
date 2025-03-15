@@ -6,12 +6,11 @@ use App\Domain\Support\Exceptions\DomainException;
 use App\Domain\Support\Exceptions\NotFoundException;
 use App\Domain\Support\Exceptions\ValidationException;
 use App\Domain\Transacao\Services\CriarTransacaoService;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\ContaResource;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CriarTransacaoController extends Controller
+class CriarTransacaoController
 {
     public function __invoke(Request $request, CriarTransacaoService $service)
     {

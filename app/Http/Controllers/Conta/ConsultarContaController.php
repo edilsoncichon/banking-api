@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Conta;
 
 use App\Domain\Conta\Repository\ContaRepository;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\ContaResource;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ConsultarContaController extends Controller
+class ConsultarContaController
 {
     public function __invoke(Request $request, ContaRepository $repository)
     {
