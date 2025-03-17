@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Transacao\Services;
 
+use App\Domain\Conta\Conta;
 use App\Domain\Conta\Repository\ContaRepository;
 use App\Domain\Support\Exceptions\DomainException;
 use App\Domain\Support\Exceptions\NotFoundException;
@@ -13,6 +14,7 @@ use App\Domain\Transacao\Transacao;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 final class CriarTransacaoService
 {
@@ -20,20 +22,13 @@ final class CriarTransacaoService
 
     /**
      * @throws ValidationException
+     * @throws Throwable
+     * @throws NotFoundException
      * @throws DomainException
-     * @throws \Throwable
      */
     public function execute(array $data): Transacao
     {
-        $validator = Validator::make($data, [
-            'numero_conta' => 'required|integer|min:0',
-            'forma_pagamento' => Rule::enum(FormaPagamento::class),
-            'valor' => 'required|numeric|min:0',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors()->all());
-        }
+        $this->validate($data);
 
         $conta = $this->contaRepository->findByNumeroConta((int) $data['numero_conta']);
 
@@ -50,12 +45,36 @@ final class CriarTransacaoService
             throw new DomainException('Saldo insuficiente.');
         }
 
+        $this->atualizarSaldo($conta, $transacao);
+
+        return $transacao;
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    private function validate(array $data): void
+    {
+        $validator = Validator::make($data, [
+            'numero_conta' => 'required|integer|min:0',
+            'forma_pagamento' => Rule::enum(FormaPagamento::class),
+            'valor' => 'required|numeric|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator->errors()->all());
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    private function atualizarSaldo(Conta $conta, Transacao $transacao): void
+    {
         DB::transaction(function () use ($transacao, $conta) {
             $transacao->save();
             $conta->saldo -= $transacao->calcularValorEfetivo();
             $conta->save();
         });
-
-        return $transacao;
     }
 }
