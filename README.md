@@ -36,22 +36,22 @@ Certifique-se de ter instalado:
 
 ### Passos para instalação
 
-1. Suba os containers Docker:
+1. Configure o arquivo `.env`:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Suba os containers Docker:
 
    ```bash
    ./sail up -d
    ```
 
-2. Instale as dependências do Composer:
+3. Instale as dependências do Composer:
 
    ```bash
    ./sail composer install
-   ```
-
-3. Configure o arquivo `.env`:
-
-   ```bash
-   cp .env.example .env
    ```
 
 4. Gere a chave da aplicação Laravel:
@@ -65,9 +65,15 @@ Certifique-se de ter instalado:
    ```bash
    ./sail artisan migrate
    ```
+
+6. Reinicie os containers:
+
+   ```bash
+   ./sail restart
+   ```
 ---
 
-> A API estará disponível em `http://localhost/api`.
+> A API estará disponível em http://localhost/api.
 
 ## Qualidade de código
 
@@ -84,7 +90,5 @@ Para corrigir padrões de sintaxe, execute:
 ```bash
 ./sail pint
 ```
-
----
 
 ---
