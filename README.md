@@ -77,15 +77,17 @@ Certifique-se de ter instalado:
 
 ## Qualidade de código
 
-### Executando os testes
+### Testes
+
+Para rodar os testes automatizados, execute:
 
 ```bash
-./sail test
+./sail test --coverage
 ```
 
-### Executando Code Standards Fixer
+### Code Standards Fixer
 
-Para corrigir padrões de sintaxe, execute:
+Para verificar e corrigir padrões de sintaxe, execute:
 
 ```bash
 ./sail pint
