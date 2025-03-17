@@ -13,9 +13,9 @@ enum FormaPagamento: string
     public function getTaxa(): float
     {
         return match ($this) {
-            self::PIX => config('domain.formas_pagamento.pix.taxa'),
-            self::CREDITO => config('domain.formas_pagamento.credito.taxa'),
-            self::DEBITO => config('domain.formas_pagamento.debito.taxa'),
+            self::PIX => 0.00,
+            self::CREDITO => 0.05,
+            self::DEBITO => 0.03,
         };
     }
 }
