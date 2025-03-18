@@ -1,17 +1,18 @@
 <p align="center">
-    <a href="https://www.objective.com.br/" target="_blank">
-        <img src="https://agiletrendsbr.com/2021/wp-content/uploads/2015/02/logo-objective.jpg" width="200" alt="Logo">
+    <a href="#" target="_blank">
+        <img src="./.doc/header-image.jpg" width="300" alt="Logo">
     </a>
 </p>
 
 # Banking API
 
-Este repositório contém a solução para o desafio técnico proposto pela Objective, que consiste em uma API REST para
-gerenciamento de contas bancárias.
+Este repositório consiste em uma API REST para gerenciamento de contas bancárias.
 
-### Requisitos
+**IMPORTANTE: Este é um projeto utilizado para efeito de estudos pessoais!**
 
-Os requisitos do projeto estão descritos [neste arquivo](.doc/Desafio_Tecnico_OBJ.pdf).
+### Documentação
+
+Para mais detalhes sobre os requisitos e regras de negócio, veja a [documentação](.doc/) do projeto. 
 
 ### Tecnologias utilizadas
 

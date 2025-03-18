@@ -1,11 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "objective/banking-api",
+    "name": "edilsoncichon/banking-api",
     "type": "project",
     "description": "Banking API.",
     "keywords": [
-        "objective",
-        "challenge",
         "api",
         "banking"
     ],
