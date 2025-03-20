@@ -6,15 +6,15 @@
 
 # Banking API
 
-Este repositório consiste em uma API REST para gerenciamento de contas bancárias.
+This repository consists of a REST API for bank account management.
 
-**IMPORTANTE: Este é um projeto utilizado para efeito de estudos pessoais!**
+**IMPORTANT: This is a project used for personal study purposes!**
 
-### Documentação
+### Documentation
 
-Para mais detalhes sobre os requisitos e regras de negócio, veja a [documentação](.doc/) do projeto. 
+For more details about requirements and business rules, see the project [documentation](.doc/).
 
-### Tecnologias utilizadas
+### Technologies used
 
 - PHP 8.2+
 - Composer 2
@@ -24,63 +24,63 @@ Para mais detalhes sobre os requisitos e regras de negócio, veja a [documentaç
 - PHP CS Fixer(via Laravel Pint)
 - Docker (via Laravel Sail)
 
-## Configuração do Ambiente
+## Environment Setup
 
-Siga estas instruções para configurar o ambiente de desenvolvimento:
+Follow these instructions to set up the development environment:
 
-### Pré-requisitos
+### Prerequisites
 
-Certifique-se de ter instalado:
+Make sure you have installed:
 
 - [Docker v28+](https://docs.docker.com/engine/install/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-### Passos para instalação
+### Installation Steps
 
-1. Configure o arquivo `.env`:
+1. Configure the `.env` file:
 
    ```bash
    cp .env.example .env
    ```
 
-2. Suba os containers Docker:
+2. Start Docker containers:
 
    ```bash
    ./sail up -d
    ```
 
-3. Instale as dependências do Composer:
+3. Install Composer dependencies:
 
    ```bash
    ./sail composer install
    ```
 
-4. Gere a chave da aplicação Laravel:
+4. Generate Laravel application key:
 
    ```bash
    ./sail artisan key:generate
    ```
 
-5. Execute as migrations:
+5. Run migrations:
 
    ```bash
    ./sail artisan migrate
    ```
 
-6. Reinicie os containers:
+6. Restart containers:
 
    ```bash
    ./sail restart
    ```
 ---
 
-> A API estará disponível em http://localhost/api.
+> The API will be available at http://localhost/api.
 
-## Qualidade de código
+## Code Quality
 
-### Testes
+### Tests
 
-Para rodar os testes automatizados, execute:
+To run automated tests, execute:
 
 ```bash
 ./sail test --coverage
@@ -88,7 +88,7 @@ Para rodar os testes automatizados, execute:
 
 ### Code Standards Fixer
 
-Para verificar e corrigir padrões de sintaxe, execute:
+To check and fix syntax patterns, execute:
 
 ```bash
 ./sail pint

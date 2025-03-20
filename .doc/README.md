@@ -1,59 +1,58 @@
-# API de Gestão Bancária
+# Banking Management API
 
-## 1. Resumo
+## 1. Abstract
 
-Este sistema fornece uma API para gestão de contas bancárias e transações financeiras. Através dos endpoints `/conta` e `/transacao`, é possível criar contas, consultar saldos e realizar transações como débito, crédito e Pix, com taxas diferenciadas.
+This system provides an API for managing bank accounts and financial transactions. Through the `/account` and `/transaction` endpoints, it is possible to create accounts, check balances, and perform transactions such as debit, credit, and Pix, with differentiated fees.
 
-## 2. Requisitos Funcionais
+## 2. Functional Requirements
 
-### 2.1 Criação de Conta
+### 2.1 Account Creation
 
-* **Endpoint:** `POST /conta`
-* **Entrada:** JSON com `numero_conta` (inteiro) e `saldo` (float).
-* **Saída:** HTTP 201 e JSON com `numero_conta` e `saldo` da conta criada.
-* **Validação:**
-    * O sistema deve validar se a conta já existe, retornando um erro caso positivo.
+* **Endpoint:** `POST /account`
+* **Input:** JSON with `account_number` (integer) and `balance` (float).
+* **Output:** HTTP 201 and JSON with `account_number` and `balance` of the created account.
+* **Validation:**
+    * The system must validate if the account already exists, returning an error if it does.
 
-### 2.2 Consulta de Saldo
+### 2.2 Balance Inquiry
 
-* **Endpoint:** `GET /conta?numero_conta={numero_conta}`
-* **Entrada:** `numero_conta` como parâmetro de consulta.
-* **Saída:**
-    * HTTP 200 e JSON com `numero_conta` e `saldo` se a conta existir.
-    * HTTP 404 se a conta não existir.
+* **Endpoint:** `GET /account?account_number={account_number}`
+* **Input:** `account_number` as a query parameter.
+* **Output:**
+    * HTTP 200 and JSON with `account_number` and `balance` if the account exists.
+    * HTTP 404 if the account does not exist.
 
-### 2.3 Transações Financeiras
+### 2.3 Financial Transactions
 
-* **Endpoint:** `POST /transacao`
-* **Entrada:** JSON com `forma_pagamento` (P, C ou D), `numero_conta` e `valor` (float).
-* **Saída:**
-    * HTTP 201 e JSON com `numero_conta` e `saldo` atualizado após a transação.
-    * HTTP 404 caso não haja saldo disponível.
-* **Formas de pagamento e taxas:**
-    * Débito (D): Taxa de 3% sobre o valor da transação.
-    * Crédito (C): Taxa de 5% sobre o valor da transação.
-    * Pix (P): Sem taxas.
-* **Validações:**
-    * O sistema deve garantir que as transações não resultem em saldo negativo.
+* **Endpoint:** `POST /transaction`
+* **Input:** JSON with `payment_method` (P, C, or D), `account_number`, and `value` (float).
+* **Output:**
+    * HTTP 201 and JSON with `account_number` and updated `balance` after the transaction.
+    * HTTP 400 if there is not enough available balance.
+* **Payment Methods and Fees:**
+    * Debit (D): 3% fee on the transaction value.
+    * Credit (C): 5% fee on the transaction value.
+    * Pix (P): No fees.
+* **Validations:**
+    * The system must ensure that transactions do not result in a negative balance.
 
-## 3. Formatos de Entrada/Saída
+## 3. Input/Output Formats
 
-* Todas as entradas e saídas seguem o formato JSON.
-* Siglas para as formas de pagamento:
+* All inputs and outputs follow the JSON format.
+* Abbreviations for payment methods:
     * P => Pix
-    * C => Cartão de Crédito
-    * D => Cartão de Débito
+    * C => Credit Card
+    * D => Debit Card
 
-## 4. Observações
+## 4. Notes
 
-* As contas não possuem limite de cheque especial (saldo negativo).
-* As taxas devem ser acrescidas no valor total descontado da conta bancária.
+* Accounts do not have an overdraft limit (negative balance).
+* The fees must be added to the total value that will be discounted from the bank account.
 
-## 5. Requisitos não Funcionais
+## 5. Non-Functional Requirements
 
-* Testes unitários, de integração e end-to-end (E2E).
-* Commits bem descritos seguindo boas práticas.
-* Código limpo e organizado.
-* Persistência dos dados.
-* Documentação básica.
-
+* Unit, integration, and end-to-end (E2E) tests.
+* Well-described commits following best practices.
+* Clean and organized code.
+* Data persistence.
+* Basic documentation.
