@@ -6,14 +6,9 @@ namespace App\Domain\Conta\Repository;
 
 use App\Domain\Conta\Conta;
 
-final class ContaRepository
+final class CreateAccountRepository
 {
-    public function findByNumeroConta(int $numeroConta): ?Conta
-    {
-        return Conta::query()->firstWhere('numero_conta', $numeroConta);
-    }
-
-    public function create(int $numeroConta, float $saldo): Conta
+    public function handle(int $numeroConta, float $saldo): Conta
     {
         $conta = new Conta;
         $conta->numero_conta = $numeroConta;

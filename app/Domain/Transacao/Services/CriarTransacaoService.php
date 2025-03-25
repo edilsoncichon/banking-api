@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Transacao\Services;
 
 use App\Domain\Conta\Conta;
-use App\Domain\Conta\Repository\ContaRepository;
+use App\Domain\Conta\Repository\FindByAccountNumberRepository;
 use App\Domain\Support\Exceptions\DomainException;
 use App\Domain\Support\Exceptions\NotFoundException;
 use App\Domain\Support\Exceptions\ValidationException;
@@ -18,7 +18,7 @@ use Throwable;
 
 final class CriarTransacaoService
 {
-    public function __construct(private ContaRepository $contaRepository) {}
+    public function __construct(private FindByAccountNumberRepository $findAccountRepository) {}
 
     /**
      * @throws ValidationException
@@ -30,7 +30,7 @@ final class CriarTransacaoService
     {
         $this->validate($data);
 
-        $conta = $this->contaRepository->findByNumeroConta((int) $data['numero_conta']);
+        $conta = $this->findAccountRepository->handle((int) $data['numero_conta']);
 
         if (is_null($conta)) {
             throw new NotFoundException('Conta não encontrada.');
